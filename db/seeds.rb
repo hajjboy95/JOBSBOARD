@@ -9,9 +9,16 @@
 require 'faker'
 include Faker
 
+category_id = [1,2,3,4]
+count = 0
+Job.all.each do |job|
 
-100.times do
-  job = Job.create(title:Name.title , description:Lorem.paragraph, company:Company.name , url:Internet.url)
+    job.category_id = category_id.sample
+    job.save!
+
+    puts job.category_id
+  count += 1
 
 end
- 
+
+puts count

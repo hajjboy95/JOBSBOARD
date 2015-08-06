@@ -4,7 +4,17 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    if params[:category].blank?
+      @jobs = Job.order("created_at DESC")
+    else
+      @category_id = Category.find_by(name: params[:category]).id
+      @jobs = Job.where(category_id: @category_id).order("created_at DESC")
+
+
+
+
+
+    end
   end
 
   # GET /jobs/1
@@ -69,6 +79,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:title, :description, :company, :url)
+      params.require(:job).permit(:title, :description, :company, :url,:category_id)
     end
 end
