@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<% @jobs.each  do |job| %>
+
+    <h2><%= link_to job.title , job_path(job)  %></h2>
+    <p><%= job.company %></p>
+
+<%  end %>
+
+<%= link_to 'New Job', new_job_path %>
