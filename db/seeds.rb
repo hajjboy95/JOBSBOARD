@@ -10,15 +10,15 @@ require 'faker'
 include Faker
 
 category_id = [1,2,3,4]
+
 count = 0
-Job.all.each do |job|
 
-    job.category_id = category_id.sample
-    job.save!
+100.times do
 
-    puts job.category_id
+  job = Job.create(title: Commerce.department, description: Company.bs, company: Company.name, url: Internet.url, category_id: category_id.sample)
+
+  job.save!
   count += 1
-
 end
 
 puts count
