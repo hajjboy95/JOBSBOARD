@@ -21,6 +21,7 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+
   end
 
   # GET /jobs/new
@@ -82,4 +83,5 @@ class JobsController < ApplicationController
     def job_params
       params.require(:job).permit(:title, :description, :company, :url,:category_id)
     end
+
 end
