@@ -22,7 +22,11 @@
       <% Category.all.each do |category|  %>
           <li><%= link_to category.name , jobs_path(category: category.name) %></li>
       <% end  %>
-      <li><%= link_to "Your Jobs" ,  %></li>
+      <% if admin_signed_in? %>
+
+    <li><%= link_to "Your Jobs" , jobs_path(admin_id:current_admin.id)  %></li>
+      <% end  %>
+
     </ul>
 
     <% if admin_signed_in? %>

@@ -10,7 +10,11 @@ class JobsController < ApplicationController
     else
       @category_id = Category.find_by(name: params[:category]).id
       @jobs = Job.where(category_id: @category_id).order("created_at DESC")
+    end
 
+
+    if !params[:admin_id].blank?
+      @jobs = Job.where(admin_id:params[:admin_id]).order("created_at DESC")
 
     end
   end
