@@ -1,12 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <div id="jobs">
-  <% @jobs.each  do |job| %>
-      <div class="job">
-        <h2><%= link_to job.title , job_path(job)  %></h2>
-        <p><%= job.company %></p>
-      </div>
+
+  <% if @jobs.blank?  %>
+
+  <h2 style="color:snow  ;">All you new Jobs you created will appear here once created , Get Creating :D </h2>
+
+
+
+  <% else   %>
+      <% @jobs.each  do |job| %>
+          <div class="job">
+            <h2><%= link_to job.title , job_path(job)  %></h2>
+            <p><%= job.company %></p>
+          </div>
+
+      <%  end %>
 
   <%  end %>
+
+
+
 </div>
 

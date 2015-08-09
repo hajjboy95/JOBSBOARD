@@ -22,17 +22,37 @@
       <% Category.all.each do |category|  %>
           <li><%= link_to category.name , jobs_path(category: category.name) %></li>
       <% end  %>
+      <% if admin_signed_in? %>
+
+    <li><%= link_to "Your Jobs" , jobs_path(admin_id:current_admin.id)  %></li>
+      <% end  %>
+
     </ul>
 
-    <% if user_signed_in? %>
+    <% if admin_signed_in? %>
+
+        Welcome <%= current_admin.email %>
+        <%= link_to "Sign Out" , destroy_admin_session_path , class: "navbar-text navbar-right navbar-link" , method: :delete %>
+        <%= link_to "New Job" , new_job_path , class: "navbar-text navbar-right navbar-link" %>
+
+
+  <% elsif user_signed_in? %>
         <%= link_to "Sign Out" , destroy_user_session_path , class: "navbar-text navbar-right navbar-link" , method: :delete %>
-    <% else   %>
+
+
+    <% else  %>
+        <%= link_to "Admin Sign In" , new_admin_session_path , class: "navbar-text navbar-right navbar-link" %>
+        <%= link_to "Admin Sign Up" , new_admin_registration_path , class: "navbar-text navbar-right navbar-link" %>
+
         <%= link_to "Sign In" , new_user_session_path , class: "navbar-text navbar-right navbar-link" %>
         <%= link_to "Sign Up" , new_user_registration_path , class: "navbar-text navbar-right navbar-link" %>
 
-    <%end  %>
+    <% end %>
 
-    <!--<%= link_to "New Job" , new_job_path , class: "navbar-text navbar-right navbar-link" %>-->
+
+
+
+
 
   </div>
 </nav>

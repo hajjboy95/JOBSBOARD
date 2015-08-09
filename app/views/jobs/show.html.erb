@@ -16,7 +16,11 @@
 </div>
 <div id="links">
   <%= link_to 'Back' , root_path  , class:"btn btn-sm btn-default"%>
-  <%= link_to 'Edit', edit_job_path(@job), class:"btn btn-sm btn-default" %>
-  <%= link_to 'Delete', job_path(@job) , method: :delete , data: {confirm: "Are you sure?"} , class:"btn btn-sm btn-default"%>
+  <% if admin_signed_in? && current_admin.id == @job.admin_id %>
+      <%= link_to 'Edit', edit_job_path(@job), class:"btn btn-sm btn-default" %>
+      <%= link_to 'Delete', job_path(@job) , method: :delete , data: {confirm: "Are you sure?"} , class:"btn btn-sm btn-default"%>
+
+  <% end %>
+
 
 </div>

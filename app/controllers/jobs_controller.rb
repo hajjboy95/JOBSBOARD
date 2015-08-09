@@ -1,19 +1,20 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /jobs
   # GET /jobs.json
   def index
-    puts "params #{params}"
     if params[:category].blank?
       @jobs = Job.order("created_at DESC")
     else
       @category_id = Category.find_by(name: params[:category]).id
       @jobs = Job.where(category_id: @category_id).order("created_at DESC")
+    end
 
 
-
-
+    if !params[:admin_id].blank?
+      @jobs = Job.where(admin_id:params[:admin_id]).order("created_at DESC")
 
     end
   end
@@ -53,6 +54,8 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1.json
   def update
     respond_to do |format|
+
+      puts ("admin_id = #{params}")
       if @job.update(job_params)
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
@@ -81,7 +84,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:title, :description, :company, :url,:category_id)
+      params.require(:job).permit(:title, :description, :company, :url,:category_id , :admin_id )
     end
 
 end
